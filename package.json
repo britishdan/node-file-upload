@@ -6,7 +6,10 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "form-data": "*",
+    "formidable": "*"
+  },
   "devDependencies": {
     "mocha": "*",
     "chai": "*"

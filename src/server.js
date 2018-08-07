@@ -3,9 +3,9 @@ const router = require("./router").router;
 
 const handleRequest = function (request, response) {
     const url = request.url;
-    console.log(`got request: ${url}`);
+    console.log(`** handleRequest ** ${url}`);
 
-    router(url, response)
+    router(url, request, response)
 };
 
 this.server = http.createServer(handleRequest);
