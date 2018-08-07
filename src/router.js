@@ -37,9 +37,9 @@ exports.router = function (url, request, response) {
     else if(url === '/fileupload') {
         const form = new formidable.IncomingForm();
         form.parse(request, function (parseError, fields, files) {
-            if (files.file) {
-                const oldpath = files.file.path;
-                const newpath = `/tmp/node-file-upload/${files.file.name}`;
+            if (files.filetoupload) {
+                const oldpath = files.filetoupload.path;
+                const newpath = `/tmp/node-file-upload/${files.filetoupload.name}`;
                 fs.rename(oldpath, newpath, function (renameError) {
                     if (renameError) throw renameError;
                     writeOKHeader(response);
@@ -50,6 +50,7 @@ exports.router = function (url, request, response) {
                 });
             }
             else {
+                console.log('parse error!');
                 console.log(parseError);
                 writeOKHeader(response);
                 startHtml(response);

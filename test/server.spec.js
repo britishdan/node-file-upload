@@ -107,13 +107,13 @@ describe('server', function () {
             if (!fs.existsSync('/tmp/node-file-upload')) {
                 fs.mkdirSync('/tmp/node-file-upload');
             }
-            if (fs.existsSync('/tmp/node-file-upload/file.txt')) {
-                fs.unlinkSync('/tmp/node-file-upload/file.txt');
+            if (fs.existsSync('/tmp/node-file-upload/test-file.txt')) {
+                fs.unlinkSync('/tmp/node-file-upload/test-file.txt');
             }
 
             const formData = require('form-data');
             const form = new formData();
-            form.append('file', fs.createReadStream('/Users/danielc/src/node/node-file-upload/test/resources/file.txt'));
+            form.append('filetoupload', fs.createReadStream('/Users/danielc/src/node/node-file-upload/test/resources/test-file.txt'));
 
             const postOptionsWithFile = postOptions;
             postOptionsWithFile.headers = form.getHeaders();
@@ -121,7 +121,7 @@ describe('server', function () {
             form.pipe(request);
 
             request.on('response', function (response) {
-                expect(fs.existsSync('/tmp/node-file-upload/file.txt')).to.be.true;
+                expect(fs.existsSync('/tmp/node-file-upload/test-file.txt')).to.be.true;
 
                 let data = '';
                 response.on('data', function (chunk) {
@@ -135,5 +135,4 @@ describe('server', function () {
             });
         });
     });
-
 });
